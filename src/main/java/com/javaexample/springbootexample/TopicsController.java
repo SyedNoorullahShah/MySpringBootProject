@@ -9,7 +9,7 @@ import java.util.List;
 public class TopicsController {
     @Autowired
     private TopicsService topicsService;
-
+    //test comment master
     @RequestMapping(value = "/topics", method = RequestMethod.GET)
     public List<Topic> sendTopics() {
         return topicsService.getTopics();
