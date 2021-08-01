@@ -1,4 +1,4 @@
-package com.javaexample.springbootexample;
+package com.javaexample.springbootexample.topics;
 
 import org.springframework.data.repository.CrudRepository;
 

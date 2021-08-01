@@ -1,4 +1,4 @@
-package com.javaexample.springbootexample;
+package com.javaexample.springbootexample.topics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +20,12 @@ public class TopicsController {
         return topicsService.getTopicById(id);
     }
 
-    @RequestMapping(value = "/topics", method = RequestMethod.PUT)
+    @RequestMapping(value = "/topics", method = RequestMethod.POST)
     public void addTopic(@RequestBody Topic newTopic) {
         topicsService.addTopic(newTopic);
     }
 
-    @RequestMapping(value = "/topics/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/topics/{id}", method = RequestMethod.PUT)
     public void updateTopic(@RequestBody Topic updatedTopic, @PathVariable String id) {
         topicsService.updateTopic(updatedTopic, id);
     }
