@@ -12,10 +12,8 @@ public class CoursesService {
     @Autowired
     private CoursesRepo repo;
 
-    public List<Course> getCourses() {
-        List<Course> courses = new ArrayList<>();
-        repo.findAll()
-                .forEach(courses::add);
+    public List<Course> getCourses(String topicId) {
+        List<Course> courses = new ArrayList<>(repo.findByTopicId(topicId));
         return courses;
     }
 
@@ -27,7 +25,7 @@ public class CoursesService {
         repo.save(newCourse);
     }
 
-    public void updateCourse(Course updatedCourse, String id) {
+    public void updateCourse(Course updatedCourse) {
         repo.save(updatedCourse);
     }
 
