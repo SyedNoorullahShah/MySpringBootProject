@@ -29,7 +29,7 @@ public class TopicsService {
         repo.save(newTopic);
     }
 
-    public void updateTopic(Topic updatedTopic, String id) {
+    public void updateTopic(Topic updatedTopic) {
         repo.save(updatedTopic);
     }
 
