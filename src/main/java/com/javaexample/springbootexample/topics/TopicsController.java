@@ -26,8 +26,8 @@ public class TopicsController {
     }
 
     @RequestMapping(value = "/topics/{id}", method = RequestMethod.POST)
-    public void updateTopic(@RequestBody Topic updatedTopic) {
-        topicsService.updateTopic(updatedTopic);
+    public void updateTopic(@RequestBody Topic updatedTopic, @PathVariable String id) {
+        topicsService.updateTopic(updatedTopic, id);
     }
 
     @RequestMapping(value = "/topics/{id}", method = RequestMethod.DELETE)
