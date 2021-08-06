@@ -1,15 +1,19 @@
-package com.javaexample.springbootexample.courses;
+package com.javaexample.springbootexample.data;
 
-import com.javaexample.springbootexample.topics.Topic;
+import com.javaexample.springbootexample.dto.CourseDto;
+import com.javaexample.springbootexample.dto.payload.CourseRequestDto;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Course {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
 
@@ -20,10 +24,16 @@ public class Course {
     }
 
 
-    public Course(String id, String name, String description) {
-        this.id = id;
+    public Course(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Course(CourseRequestDto courseDto) {
+        this.name = courseDto.getName();
+        this.description = courseDto.getDescription();
+        this.topic = new Topic("","");
+        topic.setId(courseDto.getTopicId());
     }
 
     public void setTopic(Topic topic) {
@@ -34,11 +44,11 @@ public class Course {
         return topic;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

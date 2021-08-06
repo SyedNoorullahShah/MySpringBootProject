@@ -1,12 +1,17 @@
-package com.javaexample.springbootexample.topics;
+package com.javaexample.springbootexample.data;
+
+import com.javaexample.springbootexample.dto.TopicDto;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Topic {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
 
@@ -14,17 +19,21 @@ public class Topic {
     }
 
 
-    public Topic(String id, String name, String description) {
-        this.id = id;
+    public Topic(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public String getId() {
+    public Topic(TopicDto topicDto){
+        this.name = topicDto.getName();
+        this.description = topicDto.getDescription();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
