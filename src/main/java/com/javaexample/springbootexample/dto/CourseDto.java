@@ -14,7 +14,7 @@ public class CourseDto {
     public CourseDto() {
     }
 
-    public CourseDto(Course course){
+    public CourseDto(Course course) {
         id = course.getId();
         name = course.getName();
         description = course.getDescription();

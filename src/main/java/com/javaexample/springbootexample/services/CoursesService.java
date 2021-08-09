@@ -1,9 +1,7 @@
 package com.javaexample.springbootexample.services;
 
 import com.javaexample.springbootexample.data.Course;
-import com.javaexample.springbootexample.data.Topic;
 import com.javaexample.springbootexample.dto.CourseDto;
-import com.javaexample.springbootexample.dto.TopicDto;
 import com.javaexample.springbootexample.dto.payload.CourseRequestDto;
 import com.javaexample.springbootexample.repositories.CoursesRepository;
 import org.hibernate.service.spi.ServiceException;
@@ -18,35 +16,36 @@ import java.util.stream.Collectors;
 public class CoursesService {
 
     @Autowired
-    private CoursesRepository repo;
+    private CoursesRepository coursesRepository;
 
     public List<CourseDto> getCourses(Long topicId) {
-        return repo.findByTopicId(topicId).stream()
-            .map(CourseDto::new)
-            .collect(Collectors.toList());
+        return coursesRepository.findByTopicId(topicId).stream()
+                .map(CourseDto::new)
+                .collect(Collectors.toList());
     }
 
     public CourseDto getCourseById(Long id) {
-        Optional<Course> course = repo.findById(id);
+        Optional<Course> course = coursesRepository.findById(id);
         return course.isPresent() ? new CourseDto(course.get()) : null;
     }
 
     public CourseDto addCourse(CourseRequestDto courseRequestDto) {
         Course course = new Course(courseRequestDto);
-        return new CourseDto(repo.save(course));
+        return new CourseDto(coursesRepository.save(course));
     }
 
     public CourseDto updateCourse(Long id, CourseRequestDto updatedCourseDto) {
-        Course updatedCourse = new Course(updatedCourseDto);
-        updatedCourse.setId(id);
-        return new CourseDto(repo.save(updatedCourse));
+        Optional<Course> course = coursesRepository.findById(id);
+        if (course.isPresent()) {
+            course.get().updateCourseDetails(updatedCourseDto);
+            return new CourseDto(coursesRepository.save(course.get()));
+        } else return null;
     }
 
     public void deleteCourse(Long id) {
-        if(repo.findById(id).isPresent()){
-            repo.deleteById(id);
-        }
-        else{
+        if (coursesRepository.findById(id).isPresent()) {
+            coursesRepository.deleteById(id);
+        } else {
             throw new ServiceException("Course for this id doesn't exist");
         }
     }

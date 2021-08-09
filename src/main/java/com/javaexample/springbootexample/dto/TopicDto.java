@@ -1,8 +1,10 @@
 package com.javaexample.springbootexample.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javaexample.springbootexample.data.Topic;
 
 public class TopicDto {
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Long id;
   private String name;
   private String description;

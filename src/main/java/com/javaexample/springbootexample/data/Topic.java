@@ -52,4 +52,9 @@ public class Topic {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void updateTopicDetails(TopicDto updatedTopicDto) {
+        setName(updatedTopicDto.getName());
+        setDescription(updatedTopicDto.getDescription());
+    }
 }
